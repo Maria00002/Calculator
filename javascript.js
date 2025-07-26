@@ -6,47 +6,31 @@ let output = "";
 function operate(firstNum, operator, secondNum) {
     let result;
     switch(operator) {
-        case "+":
+        case "plus":
             result = add(firstNum, secondNum);
             break;
-        case "-":
+        case "subtract":
             result = subtract(firstNum, secondNum);
             break;
-        case "*":
+        case "multiply":
             result = multiply(firstNum, secondNum);
             break;
-        case "/":
+        case "divide":
             result = divide(firstNum, secondNum);
             break;
-
     }
-
     return result;
-
 }
 
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
+function add(a, b) {return a + b;}
+function subtract(a, b) {return a - b;}
+function multiply(a, b) {return a * b;}
+function divide(a, b) {return a / b;}
 
 const buttons = document.querySelectorAll("button");
 const bottom = document.querySelector("#bottom");
 const topDisplay = document.querySelector("#top");
-
-console.log(buttons);
+console.log(buttons); //
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -83,11 +67,30 @@ buttons.forEach((button) => {
                 break;
             case "plus":
                 if (output.length > 0) {
-                    topDisplay.textContent = output;
-                }
+                    topDisplay.textContent = output + ' + ';
+                    firstNum = parseInt(output);
+                    output = "";
+                } 
                 break;
+            case "equal":
+                    topDisplay.textContent += output;
+                    secondNum = parseInt(output);
+                break;
+            // case "plus":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output;
+            //         firstNum = parseInt(output);
+            //     } 
+            //     break;
+            // case "plus":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output;
+            //         firstNum = parseInt(output);
+            //     } 
+            //     break;
         }
-    bottom.textContent = output;   
+    bottom.textContent = output;
+
     });
 });
 
