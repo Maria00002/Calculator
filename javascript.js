@@ -18,6 +18,9 @@ function operate(firstNum, operator, secondNum) {
         case "divide":
             result = divide(firstNum, secondNum);
             break;
+        case "percentage":
+            result = divide(firstNum, 100);
+            break;
     }
     return result;
 }
@@ -70,24 +73,60 @@ buttons.forEach((button) => {
                     topDisplay.textContent = output + ' + ';
                     firstNum = parseInt(output);
                     output = "";
+                    operator = "plus";
+                } 
+                break;
+            case "subtract":
+                if (output.length > 0) {
+                    topDisplay.textContent = output + ' - ';
+                    firstNum = parseInt(output);
+                    output = "";
+                    operator = "subtract";
+                } 
+                break;
+            case "multiply":
+                if (output.length > 0) {
+                    topDisplay.textContent = output + ' * ';
+                    firstNum = parseInt(output);
+                    output = "";
+                    operator = "multiply";
+                } 
+                break;
+            case "percentage":
+                if (output.length > 0) {
+                    topDisplay.textContent = output + ' % ';
+                    firstNum = parseInt(output);
+                    output = "";
+                    operator = "percentage";
+                } 
+                break;
+            case "divide":
+                if (output.length > 0) {
+                    topDisplay.textContent = output + ' / ';
+                    firstNum = parseInt(output);
+                    output = "";
+                    operator = "divide";
                 } 
                 break;
             case "equal":
                     topDisplay.textContent += output;
                     secondNum = parseInt(output);
+                    console.log(firstNum);
+                    console.log(operator);
+                    console.log(secondNum);
+                
+                    switch(operator) {
+                        case "plus":
+                        case "subtract":
+                        case "multiply":
+                        case "percentage":
+                        case "divide":
+                        output = operate(firstNum, operator, secondNum);
+                            break;
+                    }
+                    
                 break;
-            // case "plus":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output;
-            //         firstNum = parseInt(output);
-            //     } 
-            //     break;
-            // case "plus":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output;
-            //         firstNum = parseInt(output);
-            //     } 
-            //     break;
+  
         }
     bottom.textContent = output;
 
