@@ -1,6 +1,7 @@
 let firstNum;
 let operator = "";
 let secondNum;
+let output = "";
 
 function operate(firstNum, operator, secondNum) {
     let result;
@@ -41,18 +42,80 @@ function divide(a, b) {
 }
 
 
-console.log(operate(13, "+", 16));
-console.log(operate(13, "-", 16));
-console.log(operate(13, "*", 16));
-console.log(operate(13, "/", 16));
+const buttons = document.querySelectorAll("button");
+const bottom = document.querySelector("#bottom");
+const topDisplay = document.querySelector("#top");
+
+console.log(buttons);
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        switch(button.id) {
+            case "zero":
+                output += "0";
+                break;
+            case "one":
+                output += "1";
+                break;
+            case "two":
+                output += "2";
+                break;
+            case "three":
+                output += "3";
+                break;
+            case "four":
+                output += "4";
+                break;
+            case "five":
+                output += "5";
+                break;
+            case "six":
+                output += "6";
+                break;
+            case "seven":
+                output += "7";
+                break;
+            case "eight":
+                output += "8";
+                break;
+            case "nine":
+                output += "9";
+                break;
+            case "plus":
+                if (output.length > 0) {
+                    topDisplay.textContent = output;
+                }
+                break;
+        }
+    bottom.textContent = output;   
+    });
+});
 
 
-// console.log(add(13,16)); //29
-// console.log(subtract(13,16)); //-3
-// console.log(multiply(13,16)); //208
-// console.log(divide(13,16)); //0.8125
 
-// console.log();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

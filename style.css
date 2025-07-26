@@ -59,13 +59,15 @@ body {
 }
 
 #clear,#delete,#percentage,#divide,#seven,#eight,#nine,#multiply,#four,
-#five,#six,#subtract,#one,#two,#three,#plus,#zero,#dot {
+#five,#six,#subtract,#one,#two,#three,#plus,#zero,#dot,#equal {
     height: 100%;
-    width: 25%;
+    /* width: 25%; */
+    width: 85px;
+    background-color: white;
 }
 
-#equal {
-    width: 50%;
+.section #equal {
+    width: 178px;
 }
            
 
