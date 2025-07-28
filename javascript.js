@@ -2,6 +2,7 @@ let firstNum;
 let operator = "";
 let secondNum;
 let output = "";
+let topDisplayContent = "";
 
 function operate(firstNum, operator, secondNum) {
     let result;
@@ -69,51 +70,63 @@ buttons.forEach((button) => {
                 output += "9";
                 break;
             case "plus":
-                if (output.length > 0) {
-                    topDisplay.textContent = output + ' + ';
+                if (output.length > 0 && operator.length == 0) {
                     firstNum = parseInt(output);
-                    output = "";
+                    output += ' + ';
+                    // console.log(firstNum);
                     operator = "plus";
-                } 
+                } else if (operator.length > 0) {
+                    if (output.split("+").length == 2) {
+                        secondNum = parseInt(output.split("+")[1]);
+                        output = "";
+                        output += operate(firstNum, operator, secondNum);
+                        firstNum = parseInt(output);
+                        secondNum = 0;
+                        output += " + ";
+                    }
+                }
+
                 break;
-            case "subtract":
-                if (output.length > 0) {
-                    topDisplay.textContent = output + ' - ';
-                    firstNum = parseInt(output);
-                    output = "";
-                    operator = "subtract";
-                } 
-                break;
-            case "multiply":
-                if (output.length > 0) {
-                    topDisplay.textContent = output + ' * ';
-                    firstNum = parseInt(output);
-                    output = "";
-                    operator = "multiply";
-                } 
-                break;
-            case "percentage":
-                if (output.length > 0) {
-                    topDisplay.textContent = output + ' % ';
-                    firstNum = parseInt(output);
-                    output = "";
-                    operator = "percentage";
-                } 
-                break;
-            case "divide":
-                if (output.length > 0) {
-                    topDisplay.textContent = output + ' / ';
-                    firstNum = parseInt(output);
-                    output = "";
-                    operator = "divide";
-                } 
-                break;
+            // case "subtract":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output + ' - ';
+            //         firstNum = parseInt(output);
+            //         output = "";
+            //         operator = "subtract";
+            //     } 
+            //     break;
+            // case "multiply":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output + ' * ';
+            //         firstNum = parseInt(output);
+            //         output = "";
+            //         operator = "multiply";
+            //     } 
+            //     break;
+            // case "percentage":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output + ' % ';
+            //         firstNum = parseInt(output);
+            //         output = "";
+            //         operator = "percentage";
+            //     } 
+            //     break;
+            // case "divide":
+            //     if (output.length > 0) {
+            //         topDisplay.textContent = output + ' / ';
+            //         firstNum = parseInt(output);
+            //         output = "";
+            //         operator = "divide";
+            //     } 
+            //     break;
             case "equal":
                     topDisplay.textContent += output;
-                    secondNum = parseInt(output);
-                    console.log(firstNum);
-                    console.log(operator);
+                    secondNum = parseInt(output.split("+")[1]); //
                     console.log(secondNum);
+                    
+                    // console.log(firstNum);
+                    // console.log(operator);
+                    // console.log(secondNum);
                 
                     switch(operator) {
                         case "plus":
@@ -129,6 +142,7 @@ buttons.forEach((button) => {
   
         }
     bottom.textContent = output;
+   
 
     });
 });
