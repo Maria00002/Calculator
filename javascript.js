@@ -3,6 +3,8 @@ let operator = "";
 let secondNum;
 let output = "";
 let topDisplayContent = "";
+let operators = [];
+let symbol;
 
 function operate(firstNum, operator, secondNum) {
     let result;
@@ -57,63 +59,49 @@ buttons.forEach((button) => {
             case "nine":
                 output += inputDigitStringConvertToDigit(button.id);
                 break;
+
             case "plus":
-                if (output.length > 0 && operator.length == 0) {
-                    firstNum = parseInt(output);
-                    output += ' + ';
-                    operator = "plus";
-                } else if (operator.length > 0) {
-                    if (output.split("+").length == 2) {
-                        secondNum = parseInt(output.split("+")[1]);
+            case "subtract":
+            case "multiply":
+            case "percentage":
+            case "divide":
+                operator = button.id;
+                operators.push(operator);
+
+                let symbolArray = ["+","-","*","%","/"];
+                let operatorArray = ["plus","subtract","multiply","percentage","divide"];
+                symbol = symbolArray[operatorArray.indexOf(operator)];
+        
+
+                if (output.length > 0) {
+                    firstNum = parseInt(output.split(operators[0])[0]);
+                    // console.log(`firstNum: ${firstNum}`); //                     
+                    output += ` ${symbol} `; 
+                    secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                    // console.log((operators)); //
+                    // console.log(`secondNum: ${secondNum}`); //
+
+                    if (!isNaN(secondNum) && operators.length > 1) {
                         output = "";
-                        output += operate(firstNum, operator, secondNum);
+                        output += operate(firstNum, operators[0], secondNum);
+                        operators.splice(0,1);
                         firstNum = parseInt(output);
-                        secondNum = 0;
-                        output += " + ";
+                        secondNum = "";
+                        output += ` ${symbol} `;
+
+                        // console.log(`output: ${output}`); //
+                        // console.log(`firstNum: ${firstNum}`); //
+                        // console.log(`operators: ${operators}`); //
+                        // console.log(`secondNum: ${secondNum}`); //
+                        
+                        // console.log("");
                     }
-                }
+                } 
 
                 break;
-            // case "subtract":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output + ' - ';
-            //         firstNum = parseInt(output);
-            //         output = "";
-            //         operator = "subtract";
-            //     } 
-            //     break;
-            // case "multiply":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output + ' * ';
-            //         firstNum = parseInt(output);
-            //         output = "";
-            //         operator = "multiply";
-            //     } 
-            //     break;
-            // case "percentage":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output + ' % ';
-            //         firstNum = parseInt(output);
-            //         output = "";
-            //         operator = "percentage";
-            //     } 
-            //     break;
-            // case "divide":
-            //     if (output.length > 0) {
-            //         topDisplay.textContent = output + ' / ';
-            //         firstNum = parseInt(output);
-            //         output = "";
-            //         operator = "divide";
-            //     } 
-            //     break;
+            
             case "equal":
                     topDisplay.textContent += output;
-                    secondNum = parseInt(output.split("+")[1]); //
-                    console.log(secondNum);
-                    
-                    // console.log(firstNum);
-                    // console.log(operator);
-                    // console.log(secondNum);
                 
                     switch(operator) {
                         case "plus":
@@ -129,6 +117,7 @@ buttons.forEach((button) => {
   
         }
     bottom.textContent = output;
+
    
 
     });
