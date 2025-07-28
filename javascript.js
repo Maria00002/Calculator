@@ -5,6 +5,8 @@ let output = "";
 let topDisplayContent = "";
 let operators = [];
 let symbol;
+let symbolArray = ["+","-","*","%","/"];
+let operatorArray = ["plus","subtract","multiply","percentage","divide"];
 
 function operate(firstNum, operator, secondNum) {
     let result;
@@ -68,8 +70,7 @@ buttons.forEach((button) => {
                 operator = button.id;
                 operators.push(operator);
 
-                let symbolArray = ["+","-","*","%","/"];
-                let operatorArray = ["plus","subtract","multiply","percentage","divide"];
+               
                 symbol = symbolArray[operatorArray.indexOf(operator)];
         
 
@@ -102,6 +103,7 @@ buttons.forEach((button) => {
             
             case "equal":
                     topDisplay.textContent += output;
+                    secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
                 
                     switch(operator) {
                         case "plus":
