@@ -61,7 +61,13 @@ buttons.forEach((button) => {
             case "nine":
                 if(output === "Error") {
                     break; 
-                } else {
+                } else if (operators[0] === "equal" && output === "0"){
+                    output = "";
+                    output += inputDigitStringConvertToDigit(button.id);
+                    operators.splice(0,1);
+                    break;
+                }
+                else {
                     output += inputDigitStringConvertToDigit(button.id);
                     break;
                 }
@@ -113,10 +119,19 @@ buttons.forEach((button) => {
                 operators.push(operator);
                 secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
 
-                if ((!secondNum && operators.includes("equal")) || (!firstNum)) {
+                console.log("after equal is pressed");//
+                console.log(`operators: ${operators}`);//
+                console.log(`!secondNum: ${!secondNum}`);
+                console.log(`!firstNum: ${!firstNum}`);
+
+                if (operators[0] === "equal" && !secondNum && !firstNum) {
+                    operators.splice(0,1);
+                    secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                    console.log(operators);
+                } else if ((!secondNum && operators[1]=="equal") || (!firstNum)) {
                     output = "Error";
                     break;
-                }
+                } 
 
                 topDisplay.textContent += output;
                 output = operate(firstNum, operators[0], secondNum);
@@ -150,6 +165,7 @@ buttons.forEach((button) => {
                 console.log(`secondNum: ${secondNum}`); //
                 console.log(`output: ${output}`); //
                 console.log(`operators: ${operators}`); //
+                console.log("");
                 
                 
                 break;
