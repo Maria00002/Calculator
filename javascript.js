@@ -70,6 +70,12 @@ buttons.forEach((button) => {
                     output += inputDigitStringConvertToDigit(button.id);
                     operators.splice(0,1);
                     break;
+                } else if (operators[operators.length-1] === "equal"){
+                    output = "";
+                    topDisplay.textContent = "";
+                    output += inputDigitStringConvertToDigit(button.id);
+                    operators.splice(0,operators.length);
+                    break;
                 }
                 else {
                     output += inputDigitStringConvertToDigit(button.id);
@@ -131,7 +137,7 @@ buttons.forEach((button) => {
                 if (operators[0] === "equal" && !secondNum && !firstNum) {
                     operators.splice(0,1);
                     secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                    console.log(operators);
+                    console.log(operators); // 
                 } else if ((!secondNum && operators[1]=="equal") || (!firstNum)) {
                     output = "Error";
                     break;
