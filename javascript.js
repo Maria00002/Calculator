@@ -59,8 +59,14 @@ buttons.forEach((button) => {
             case "seven":
             case "eight":
             case "nine":
-                output += inputDigitStringConvertToDigit(button.id);
-                break;
+                if(output === "Error") {
+                    break; 
+                } else {
+                    output += inputDigitStringConvertToDigit(button.id);
+                    break;
+                }
+               
+                
 
             case "plus":
             case "subtract":
@@ -75,18 +81,26 @@ buttons.forEach((button) => {
                     firstNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
                     output += ` ${symbol} `; 
                     secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                    // console.log(`firstNum: ${firstNum}`); //
-                    // console.log(`secondNum: ${secondNum}`); //
-                    // console.log(`operators: ${operators}`); //
+                    console.log(`firstNum: ${firstNum}`); //
+                    console.log(`secondNum: ${secondNum}`); //
+                    console.log(`operators: ${operators}`); //
+                    console.log(""); // 
 
                     if (!isNaN(secondNum) && operators.length > 1) {
-                       
+                        
+
                         output = "";
                         output += operate(firstNum, operators[0], secondNum);
                         operators.splice(0,1);
                         firstNum = parseInt(output);
                         secondNum = "";
                         output += ` ${symbol} `;
+
+                        console.log("It has looped here"); // 
+                        console.log(`firstNum: ${firstNum}`); //
+                        console.log(`secondNum: ${secondNum}`); //
+                        console.log(`operators: ${operators}`); //
+                        console.log("");//
 
                         // console.log(`output: ${output}`); //
                         // console.log(`operators: ${operators}`); //
@@ -96,15 +110,24 @@ buttons.forEach((button) => {
 
                 break;
             
-            case "equal":
-                 if (isNaN(secondNum)) {
+            case "equal":    
+                operator = button.id;
+                operators.push(operator);
+
+                if ((!secondNum && operators.includes("equal")) || (!firstNum)) {
                     output = "Error";
                     break;
                 }
+
                 topDisplay.textContent += output;
                 secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                console.log(secondNum); //
                 output = operate(firstNum, operators[0], secondNum);
+
+                console.log("pressed =");
+                console.log(`firstNum: ${firstNum}`); //
+                console.log(`secondNum: ${secondNum}`); //
+                console.log(`operators: ${operators}`); //
+                console.log(`output: ${output}`);
               
                                         
                 break;
