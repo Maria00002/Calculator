@@ -20,8 +20,12 @@ function operate(firstNum, operator, secondNum) {
             result = multiply(firstNum, secondNum);
             break;
         case "divide":
-            result = divide(firstNum, secondNum);
-            result = result.toFixed(5);
+            if (secondNum == 0) {
+                result = "Error";
+            } else {
+                result = divide(firstNum, secondNum);
+                result = result.toFixed(5);
+            }
             break;
         case "percentage":
             result = divide(firstNum, 100);
