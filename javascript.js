@@ -77,9 +77,9 @@ buttons.forEach((button) => {
                 symbol = symbolArray[operatorArray.indexOf(operator)];
         
                 if (output.length > 0) {
-                    firstNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
+                    firstNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
                     output += ` ${symbol} `; 
-                    secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                    secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
                     console.log(`firstNum: ${firstNum}`); //
                     console.log(`secondNum: ${secondNum}`); //
                     console.log(`operators: ${operators}`); //
@@ -90,7 +90,7 @@ buttons.forEach((button) => {
                         output = "";
                         output += operate(firstNum, operators[0], secondNum);
                         operators.splice(0,1);
-                        firstNum = parseInt(output);
+                        firstNum = parseFloat(output);
                         secondNum = "";
                         output += ` ${symbol} `;
 
@@ -111,7 +111,7 @@ buttons.forEach((button) => {
             case "equal":    
                 operator = button.id;
                 operators.push(operator);
-                secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
 
                 if ((!secondNum && operators.includes("equal")) || (!firstNum)) {
                     output = "Error";
@@ -119,7 +119,6 @@ buttons.forEach((button) => {
                 }
 
                 topDisplay.textContent += output;
-                secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
                 output = operate(firstNum, operators[0], secondNum);
 
                 console.log("pressed =");
@@ -138,11 +137,14 @@ buttons.forEach((button) => {
                 console.log(`operators: ${operators}`); //
 
                 firstNum = 0;
-                operator = null;
                 secondNum = 0;
-                output = 0;
+                output = "0";
                 topDisplay.textContent = "";
-                operators.splice(0);
+                operators.splice(0,operators.length-1);
+
+
+                console.log("");
+                console.log("after pressing clear");
                 console.log(`firstNum: ${firstNum}`); //
                 console.log(`operator: ${operator}`); //
                 console.log(`secondNum: ${secondNum}`); //
