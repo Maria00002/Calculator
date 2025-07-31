@@ -2,11 +2,10 @@ let firstNum;
 let operator = "";
 let secondNum;
 let output = "";
-let topDisplayContent = "";
 let operators = [];
 let symbol;
-let symbolArray = ["+","-","*","%","/"];
-let operatorArray = ["plus","subtract","multiply","percentage","divide"];
+let symbolArray = ["+","-","*","%","/","="];
+let operatorArray = ["plus","subtract","multiply","percentage","divide","equal"];
 
 function operate(firstNum, operator, secondNum) {
     let result;
@@ -22,6 +21,7 @@ function operate(firstNum, operator, secondNum) {
             break;
         case "divide":
             result = divide(firstNum, secondNum);
+            result = result.toFixed(5);
             break;
         case "percentage":
             result = divide(firstNum, 100);
@@ -69,20 +69,18 @@ buttons.forEach((button) => {
             case "divide":
                 operator = button.id;
                 operators.push(operator);
-
-               
                 symbol = symbolArray[operatorArray.indexOf(operator)];
         
-
                 if (output.length > 0) {
-                    firstNum = parseInt(output.split(operators[0])[0]);
-                    // console.log(`firstNum: ${firstNum}`); //                     
+                    firstNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
                     output += ` ${symbol} `; 
                     secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                    // console.log((operators)); //
+                    // console.log(`firstNum: ${firstNum}`); //
                     // console.log(`secondNum: ${secondNum}`); //
+                    // console.log(`operators: ${operators}`); //
 
                     if (!isNaN(secondNum) && operators.length > 1) {
+                       
                         output = "";
                         output += operate(firstNum, operators[0], secondNum);
                         operators.splice(0,1);
@@ -91,34 +89,45 @@ buttons.forEach((button) => {
                         output += ` ${symbol} `;
 
                         // console.log(`output: ${output}`); //
-                        // console.log(`firstNum: ${firstNum}`); //
                         // console.log(`operators: ${operators}`); //
-                        // console.log(`secondNum: ${secondNum}`); //
-                        
-                        // console.log("");
+                        // console.log(""); //
                     }
                 } 
 
                 break;
             
             case "equal":
-                    topDisplay.textContent += output;
-                    secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                 if (isNaN(secondNum)) {
+                    output = "Error";
+                    break;
+                }
+                topDisplay.textContent += output;
+                secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                console.log(secondNum); //
+                output = operate(firstNum, operators[0], secondNum);
+              
+                                        
+                break;
+
+            case "clear":
+                firstNum = 0;
+                operator = null;
+                secondNum = 0;
+                output = 0;
+                topDisplay.textContent = "";
+                operators.splice(0);
+                console.log(`firstNum: ${firstNum}`); //
+                console.log(`operator: ${operator}`); //
+                console.log(`secondNum: ${secondNum}`); //
+                console.log(`output: ${output}`); //
+                console.log(`operators: ${operators}`); //
                 
-                    switch(operator) {
-                        case "plus":
-                        case "subtract":
-                        case "multiply":
-                        case "percentage":
-                        case "divide":
-                        output = operate(firstNum, operator, secondNum);
-                            break;
-                    }
-                    
+                
                 break;
   
         }
     bottom.textContent = output;
+    // console.log(output);
 
    
 
