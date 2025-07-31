@@ -66,7 +66,6 @@ buttons.forEach((button) => {
                     break;
                 }
                
-                
 
             case "plus":
             case "subtract":
@@ -88,7 +87,6 @@ buttons.forEach((button) => {
 
                     if (!isNaN(secondNum) && operators.length > 1) {
                         
-
                         output = "";
                         output += operate(firstNum, operators[0], secondNum);
                         operators.splice(0,1);
