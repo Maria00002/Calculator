@@ -111,6 +111,7 @@ buttons.forEach((button) => {
             case "equal":    
                 operator = button.id;
                 operators.push(operator);
+                secondNum = parseInt(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
 
                 if ((!secondNum && operators.includes("equal")) || (!firstNum)) {
                     output = "Error";
@@ -125,12 +126,17 @@ buttons.forEach((button) => {
                 console.log(`firstNum: ${firstNum}`); //
                 console.log(`secondNum: ${secondNum}`); //
                 console.log(`operators: ${operators}`); //
-                console.log(`output: ${output}`);
-              
-                                        
+                console.log(`output: ${output}`);                        
                 break;
 
             case "clear":
+                console.log("Before pressing clear");
+                console.log(`firstNum: ${firstNum}`); //
+                console.log(`operator: ${operator}`); //
+                console.log(`secondNum: ${secondNum}`); //
+                console.log(`output: ${output}`); //
+                console.log(`operators: ${operators}`); //
+
                 firstNum = 0;
                 operator = null;
                 secondNum = 0;
