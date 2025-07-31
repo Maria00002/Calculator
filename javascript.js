@@ -101,8 +101,11 @@ buttons.forEach((button) => {
                     console.log(`operators: ${operators}`); //
                     console.log(""); // 
 
+                    if (operators[0] == "equal") {
+                        operators.splice(0,1);
+                    }
+
                     if (!isNaN(secondNum) && operators.length > 1) {
-                        
                         output = "";
                         output += operate(firstNum, operators[0], secondNum);
                         operators.splice(0,1);
@@ -142,15 +145,18 @@ buttons.forEach((button) => {
                     output = "Error";
                     break;
                 } 
-
+                
+                topDisplay.textContent = "";
                 topDisplay.textContent += output;
-                output = operate(firstNum, operators[0], secondNum);
+                output = operate(firstNum, operators[0], secondNum).toString();
+                operators.splice(0,1);
 
                 console.log("pressed =");
                 console.log(`firstNum: ${firstNum}`); //
                 console.log(`secondNum: ${secondNum}`); //
                 console.log(`operators: ${operators}`); //
-                console.log(`output: ${output}`);                        
+                console.log(`output: ${output}`);  
+                console.log("");                      
                 break;
 
             case "clear":
