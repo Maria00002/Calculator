@@ -42,7 +42,6 @@ function divide(a, b) {return a / b;}
 const buttons = document.querySelectorAll("button");
 const bottom = document.querySelector("#bottom");
 const topDisplay = document.querySelector("#top");
-console.log(buttons); //
 
 function inputDigitStringConvertToDigit(digitString) {
     let arrayDigit = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
@@ -90,7 +89,6 @@ buttons.forEach((button) => {
                 else if((operators[operators.length-1] === "equal") && output.includes(".")) {
                     break;
                 } else if (firstNum) {
-                    console.log(`oeprators: ${operators}`);
                     if (!output.split(symbolArray[operatorArray.indexOf(operators[operators.length-1])])[1].includes(".")) {
                         output += ".";
                     }
@@ -126,11 +124,6 @@ buttons.forEach((button) => {
                     firstNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
                     output += ` ${symbol} `; 
                     secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                    
-                    console.log(`firstNum: ${firstNum}`); //
-                    console.log(`secondNum: ${secondNum}`); //
-                    console.log(`operators: ${operators}`); //
-                    console.log(""); // 
 
                     if (operators[0] == "equal") {
                         operators.splice(0,1);
@@ -143,12 +136,6 @@ buttons.forEach((button) => {
                         firstNum = parseFloat(output);
                         secondNum = "";
                         output += ` ${symbol} `;
-
-                        console.log("It has looped here"); // 
-                        console.log(`firstNum: ${firstNum}`); //
-                        console.log(`secondNum: ${secondNum}`); //
-                        console.log(`operators: ${operators}`); //
-                        console.log("");//
                     }
                 } 
 
@@ -159,13 +146,9 @@ buttons.forEach((button) => {
                 operators.push(operator);
                 secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
 
-                console.log("after equal is pressed");//
-                console.log(`operators: ${operators}`);//
-
                 if (operators[0] === "equal" && !secondNum && !firstNum) {
                     operators.splice(0,1);
                     secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
-                    console.log(operators); // 
                 } else if ((!secondNum && operators[1]=="equal") || (!firstNum)) {
                     output = "Error";
                     break;
@@ -174,49 +157,19 @@ buttons.forEach((button) => {
                 topDisplay.textContent = "";
                 topDisplay.textContent += output;
                 output = operate(firstNum, operators[0], secondNum).toString();
-                operators.splice(0,1);
-
-                console.log("pressed =");
-                console.log(`firstNum: ${firstNum}`); //
-                console.log(`secondNum: ${secondNum}`); //
-                console.log(`operators: ${operators}`); //
-                console.log(`output: ${output}`);  
-                console.log("");                      
+                operators.splice(0,1);                     
                 break;
 
             case "clear":
-                console.log("Before pressing clear");
-                console.log(`firstNum: ${firstNum}`); //
-                console.log(`operator: ${operator}`); //
-                console.log(`secondNum: ${secondNum}`); //
-                console.log(`output: ${output}`); //
-                console.log(`operators: ${operators}`); //
-
                 firstNum = 0;
                 secondNum = 0;
                 output = "";
                 topDisplay.textContent = "";
-                operators.splice(0,operators.length-1);
-
-
-                console.log("");
-                console.log("after pressing clear");
-                console.log(`firstNum: ${firstNum}`); //
-                console.log(`operator: ${operator}`); //
-                console.log(`secondNum: ${secondNum}`); //
-                console.log(`output: ${output}`); //
-                console.log(`operators: ${operators}`); //
-                console.log("");
-                
-                
+                operators.splice(0,operators.length-1);             
                 break;
   
         }
-    bottom.textContent = output;
-    // console.log(output);
-
-   
-
+    bottom.textContent = output;   
     });
 });
 
