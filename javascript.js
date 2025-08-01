@@ -65,12 +65,14 @@ buttons.forEach((button) => {
             case "nine":
                 if(output === "Error") {
                     break; 
-                } else if (operators[0] === "equal" && output === "0"){
-                    output = "";
-                    output += inputDigitStringConvertToDigit(button.id);
-                    operators.splice(0,1);
-                    break;
-                } else if (operators[operators.length-1] === "equal"){
+                } 
+                // else if (operators[0] === "equal" && output === "0"){
+                //     output = "";
+                //     output += inputDigitStringConvertToDigit(button.id);
+                //     operators.splice(0,1);
+                //     break;
+                // } 
+                else if (operators[operators.length-1] === "equal"){ // need to fix this logic
                     output = "";
                     topDisplay.textContent = "";
                     output += inputDigitStringConvertToDigit(button.id);
@@ -81,8 +83,26 @@ buttons.forEach((button) => {
                     output += inputDigitStringConvertToDigit(button.id);
                     break;
                 }
-               
+            case "dot":
+                if (output.includes(".") && operators.length == 0) {
+                    break;
+                } 
+                else if((operators[operators.length-1] === "equal") && output.includes(".")) {
+                    break;
+                } else if (firstNum) {
+                    console.log(`oeprators: ${operators}`);
+                    if (!output.split(symbolArray[operatorArray.indexOf(operators[operators.length-1])])[1].includes(".")) {
+                        output += ".";
+                    }
+                    break;
+                }
+                else {
+                    output += ".";
+                    break;
+                }
 
+                
+              
             case "plus":
             case "subtract":
             case "multiply":
@@ -96,6 +116,7 @@ buttons.forEach((button) => {
                     firstNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[0]);                  
                     output += ` ${symbol} `; 
                     secondNum = parseFloat(output.split(symbolArray[operatorArray.indexOf(operators[0])])[1]);
+                    
                     console.log(`firstNum: ${firstNum}`); //
                     console.log(`secondNum: ${secondNum}`); //
                     console.log(`operators: ${operators}`); //
@@ -118,10 +139,6 @@ buttons.forEach((button) => {
                         console.log(`secondNum: ${secondNum}`); //
                         console.log(`operators: ${operators}`); //
                         console.log("");//
-
-                        // console.log(`output: ${output}`); //
-                        // console.log(`operators: ${operators}`); //
-                        // console.log(""); //
                     }
                 } 
 
@@ -134,8 +151,6 @@ buttons.forEach((button) => {
 
                 console.log("after equal is pressed");//
                 console.log(`operators: ${operators}`);//
-                console.log(`!secondNum: ${!secondNum}`);
-                console.log(`!firstNum: ${!firstNum}`);
 
                 if (operators[0] === "equal" && !secondNum && !firstNum) {
                     operators.splice(0,1);
@@ -145,7 +160,7 @@ buttons.forEach((button) => {
                     output = "Error";
                     break;
                 } 
-                
+
                 topDisplay.textContent = "";
                 topDisplay.textContent += output;
                 output = operate(firstNum, operators[0], secondNum).toString();
@@ -169,7 +184,7 @@ buttons.forEach((button) => {
 
                 firstNum = 0;
                 secondNum = 0;
-                output = "0";
+                output = "";
                 topDisplay.textContent = "";
                 operators.splice(0,operators.length-1);
 
