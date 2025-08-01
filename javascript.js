@@ -101,7 +101,17 @@ buttons.forEach((button) => {
                     break;
                 }
 
-                
+            case "delete":
+                let newDisplay;
+                if (output[output.length-1] == " ") {
+                    newDisplay = output.slice(0,-3);
+                    operators.splice(-1,1);
+                } else {
+                    newDisplay = output.slice(0,-1);
+                }
+                output = "";
+                output += newDisplay; 
+                break;    
               
             case "plus":
             case "subtract":
